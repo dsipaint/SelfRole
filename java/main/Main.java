@@ -26,7 +26,7 @@ public class Main
 	{
 		try
 		{
-		  jda = JDABuilder.createDefault("")
+		  jda = JDABuilder.createDefault("NjE4NTQzODgwNDM4MTUzMjQ2.XW7N4Q.6tzP7ZM5Cj2RRl4opmutyuurenY")
 				  .enableIntents(GatewayIntent.GUILD_MEMBERS)
 				  .build();
 		}

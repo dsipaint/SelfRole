@@ -44,7 +44,7 @@ public class StopListener extends ListenerAdapter
 				   	e1.printStackTrace();
 				   } 
 				   
-				   e.getChannel().sendMessage("*Disabling al's self-role code...*").queue();
+				   e.getChannel().sendMessage("*Disabling al's self-role code...*").complete();
 				   e.getJDA().shutdown();
 				   System.exit(0);
 			  } 
