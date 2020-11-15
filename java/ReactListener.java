@@ -16,11 +16,19 @@ public class ReactListener extends ListenerAdapter
 				{
 					e.retrieveMember().queue(member -> 
 					{
+						if(member.getUser().equals(e.getJDA().getSelfUser()))
+							return;
+						
 						e.getGuild().addRoleToMember(member, r).queue();
 					});
 				}
 				else
+				{
+					if(e.getUser().equals(e.getJDA().getSelfUser()))
+						return;
+					
 					e.getGuild().addRoleToMember(e.getMember(), r).queue();
+				}
 			}
 			
 			return;
@@ -38,11 +46,19 @@ public class ReactListener extends ListenerAdapter
 				{
 					e.retrieveMember().queue(member -> 
 					{
+						if(member.getUser().equals(e.getJDA().getSelfUser()))
+							return;
+						
 						e.getGuild().removeRoleFromMember(member, r).queue();
 					});
 				}
 				else
+				{
+					if(e.getUser().equals(e.getJDA().getSelfUser()))
+						return;
+					
 					e.getGuild().removeRoleFromMember(e.getMember(), r).queue();
+				}
 			}
 			
 			return;

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.dsipaint</groupId>
   <artifactId>Selfroles</artifactId>
-  <version>2.0</version>
+  <version>2.1</version>
   <name>Selfroles</name>
   
   <dependencies>
