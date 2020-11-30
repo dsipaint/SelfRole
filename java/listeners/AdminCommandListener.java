@@ -140,9 +140,16 @@ public class AdminCommandListener extends ListenerAdapter
 	//return true if a member has discord mod, admin or is owner
 	public static boolean isStaff(Member m)
 	{
-		//if owner
-		if(m.isOwner())
-			return true;
+		try
+		{
+			//if owner
+			if(m.isOwner())
+				return true;
+		}
+		catch(NullPointerException e)
+		{
+			//no error message reee its pissing me off
+		}
 		
 		//if admin
 		if(m.hasPermission(Permission.ADMINISTRATOR))

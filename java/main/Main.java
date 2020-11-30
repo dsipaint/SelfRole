@@ -15,6 +15,7 @@ import listeners.StopListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 public class Main
 {
@@ -28,6 +29,7 @@ public class Main
 		{
 		  jda = JDABuilder.createDefault("")
 				  .enableIntents(GatewayIntent.GUILD_MEMBERS)
+				  .setMemberCachePolicy(MemberCachePolicy.ALL) //added proper caching to fix selfrole numbers
 				  .build();
 		}
 		catch (LoginException e)
@@ -44,8 +46,6 @@ public class Main
 		  
 		  e.printStackTrace();
 		}
-		
-		jda.getGuildById("565623426501443584").loadMembers();
 		
 		try
 		{

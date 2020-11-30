@@ -1,7 +1,8 @@
 package listeners;
 
-import main.Main;
 import java.util.ArrayList;
+
+import main.Main;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -24,24 +25,23 @@ public class RoleListener extends ListenerAdapter
 		 {
 			  if(args.length == 1)
 			  {
-				   String returnmsg = "**Available selfroles:** ";
+				   StringBuilder returnmsg = new StringBuilder("**Available selfroles:** ");
 				   
-				   for(String role : Main.selfroles.getOrDefault(e.getGuild().getId(), new ArrayList<String>()))
+				   ArrayList<String> roles = Main.selfroles.getOrDefault(e.getGuild().getId(), new ArrayList<String>());
+				   for(String role : roles)
 				   {
-					    
-					    Role role_obj = e.getGuild().getRoleById(role);
-					    returnmsg = String.valueOf(returnmsg) + "\n" + role_obj.getName() + " (" + getMemberCount(role_obj) + " members)";
-				   } 
+					    Role role_obj = e.getGuild().getRoleById(role);	
+					    returnmsg.append("\n" + role_obj.getName() + " (" + e.getGuild().getMembersWithRoles(role_obj).size() + " members)");
+				   }
 				   
-				   returnmsg += "\n\n**Use" + Main.PREFIX + "selfrole {role} to add/remove a role.**";
-				   returnmsg += "\n**Staff can use " + Main.PREFIX + "addselfrole {role id/name} and " + Main.PREFIX + "removeselfrole {role id/name} to make a role a selfrole or stop it being one.**";
-				
+				   returnmsg.append("\n\n**Use " + Main.PREFIX + "selfrole {role} to add/remove a role.**");
+				   returnmsg.append("\n**Staff can use " + Main.PREFIX + "addselfrole {role id/name} and " + Main.PREFIX + "removeselfrole {role id/name} to make a role a selfrole or stop it being one.**");
+				   returnmsg.append("\n**Contact al~ if there are any problems with these commands!**");
+					   
+					e.getChannel().sendMessage(returnmsg.toString()).queue();
 				   
-				   returnmsg += "\n**Contact al~ if there are any problems with these commands!**";
-				   
-				   e.getChannel().sendMessage(returnmsg).queue();
 				   return;
-			  } 
+			  }
 			  
 			  String rolename = "";
 			  for (int i = 1; i < args.length; i++)
@@ -75,9 +75,6 @@ public class RoleListener extends ListenerAdapter
 		 } 
 	}
 	
-	
-	
-	
 	public boolean addOrRemoveRole(Role r, Member m)
 	{
 		if(m.getRoles().contains(r))
@@ -88,10 +85,5 @@ public class RoleListener extends ListenerAdapter
 		
 		m.getGuild().addRoleToMember(m, r).queue();
 		return true;
-	}
-	
-	public int getMemberCount(Role r)
-	{
-		return r.getGuild().getMembersWithRoles(r).size();
 	}
 }
