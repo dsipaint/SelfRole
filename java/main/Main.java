@@ -47,6 +47,8 @@ public class Main
 		  e.printStackTrace();
 		}
 		
+		jda.getGuildById("565623426501443584").loadMembers();
+		
 		try
 		{
 			selfroles = Data.readSelfRoles();
