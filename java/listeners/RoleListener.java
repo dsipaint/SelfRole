@@ -63,9 +63,9 @@ public class RoleListener extends ListenerAdapter
 				  if(rolename.equalsIgnoreCase(role.getName()))
 				  {
 					   if(addOrRemoveRole(role, e.getMember()))
-					     e.getChannel().sendMessage("Successfully gave role " + role.getName() + " to " + e.getMember().getEffectiveName()).queue();
+					     e.getChannel().sendMessage("Successfully gave role " + role.getName() + " to " + safeName(e.getMember())).queue();
 					   else
-					     e.getChannel().sendMessage("Successfully removed role " + role.getName() + " from " + e.getMember().getEffectiveName()).queue();
+					     e.getChannel().sendMessage("Successfully removed role " + role.getName() + " from " + safeName(e.getMember())).queue();
 					   
 					   return;
 				  } 
@@ -85,5 +85,14 @@ public class RoleListener extends ListenerAdapter
 		
 		m.getGuild().addRoleToMember(m, r).queue();
 		return true;
+	}
+	
+	//quick fix for a dumb bug- is it discord or me? Probably me, I suck :)))))
+	public String safeName(Member m)
+	{
+		if(m.getEffectiveName().contains("@here") || m.getEffectiveName().contains("@everyone"))
+			return "a smart boi ;)";
+		
+		return m.getEffectiveName();
 	}
 }

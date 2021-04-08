@@ -61,7 +61,7 @@ public class AdminCommandListener extends ListenerAdapter
 						return;
 					}
 					
-					roleid = ((Role)roles.get(0)).getId();
+					roleid = roles.get(0).getId();
 				} 
 				
 				
